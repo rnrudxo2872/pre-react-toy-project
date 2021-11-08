@@ -13,12 +13,24 @@ const Circle = styled(Box)`
   border-radius:100%;
 `
 
+const Btn = styled.button`
+  background-color: tomato;
+  border: 0;
+  border-radius: 10px;
+`
+
+const Input = styled.input.attrs({required:true})`
+  background-color: blue;
+`
+
 function App() {
   return (
     <Father className="App">
       <Box bgColor={"tomato"}/>
       <Box bgColor={"blue"}/>
       <Circle bgColor="red"/>
+      <Btn as='a' href="/ee">ee</Btn>
+      <Input />
     </Father>
   );
 }
