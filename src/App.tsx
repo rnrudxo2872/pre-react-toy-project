@@ -1,11 +1,12 @@
 import styled, {keyframes} from "styled-components"
 
-const Father = styled.div`
+const Wrapper = styled.div`
   display:flex;
   width: 100vw;
   height: 100vh;
   justify-content: center;
   align-items: center;
+  background-color: ${(props) => props.theme.bgColor};
 `;
 
 const keyframe = keyframes`
@@ -36,7 +37,7 @@ const Box = styled.div`
   background-color: tomato;
   animation: ${keyframe} 2s infinite cubic-bezier(.33,.37,.7,.68);
   color:white;
-  
+
   ${Icon} {
     font-size: 20px;
     transition: font-size 3s;
@@ -51,14 +52,14 @@ const Box = styled.div`
 
 function App() {
   return (
-    <Father className="App">
+    <Wrapper className="App">
       <Box>
         <Icon>😎</Icon>
       </Box>
       <Box>
         hello
       </Box>
-    </Father>
+    </Wrapper>
   );
 }
 
