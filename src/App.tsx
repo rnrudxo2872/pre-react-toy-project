@@ -1,13 +1,7 @@
-import styled, {keyframes} from "styled-components"
-import Circle from "./components/Circle";
+import Routers from "./routes/Routers";
 
 function App() {
-  return (
-    <div className="App">
-      <Circle bgColor="black" />
-      <Circle bgColor="tomato" borderColor="blue"/>
-    </div>
-  );
+  return <Routers />;
 }
 
 export default App;
