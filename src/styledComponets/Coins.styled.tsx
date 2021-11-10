@@ -23,6 +23,12 @@ export const Coin = styled.li`
     a {
         display: block;
         padding: 10px 20px;
+        transition: color 2s cubic-bezier(0.075, 0.82, 0.165, 1), text-shadow 0.5s ease-in;
+
+        &:hover {
+            color: #3293e7;
+            text-shadow: 1px 0px 3px #0362b6;
+        }
     }
 `
 export const Img = styled.img`
