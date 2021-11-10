@@ -6,10 +6,10 @@ function Routers() {
     return (
         <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Switch>
-                <Route path="/:id">
+                <Route exact path="/:id">
                     <CoinDetail />
                 </Route>
-                <Route path="/">
+                <Route exact path="/">
                     <Coins />
                 </Route>
             </Switch>

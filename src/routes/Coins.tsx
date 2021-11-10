@@ -22,7 +22,9 @@ function Coins () {
                     pathname:`/${coin.id}`,
                     state:{
                         coinId:coin.id,
-                        coinSymbol:coin.symbol
+                        coinSymbol:coin.symbol,
+                        coinName:coin.name,
+                        coinRank:coin.rank
                     }
                 }}>
                 <Img src={`https://cryptoicon-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`} />{coin.name}
