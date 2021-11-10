@@ -4,7 +4,7 @@ import Coins from "./Coins";
 
 function Routers() {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Switch>
                 <Route path="/:id">
                     <CoinDetail />
