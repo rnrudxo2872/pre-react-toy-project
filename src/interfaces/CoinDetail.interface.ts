@@ -1,5 +1,5 @@
 export interface CoinRouteParams {
-  coinId: string;
+  id: string;
 }
 
 export interface CoinRouteState {

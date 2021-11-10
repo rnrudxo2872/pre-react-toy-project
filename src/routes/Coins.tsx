@@ -2,6 +2,8 @@ import { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { CoinInterface } from "../interfaces/Coins.interface";
 import { Coin, CoinList, Header, Title, Wrapper, Img } from "../styledComponets/Coins.styled";
+import { LoadingImage, LoadingWrapper } from "../styledComponets/Loading.styled";
+import loadingImg from "../loading-img.png"
 
 function Coins () {
     const [coins, setCoins] = useState<CoinInterface[]>([]);
@@ -10,9 +12,8 @@ function Coins () {
     useEffect(() => {
         (async() => {
             const data:CoinInterface[] = await (await fetch('https://api.coinpaprika.com/v1/coins')).json();
-            setCoins(data.slice(0,20));
+            setCoins(data.slice(0,150));
             setLoading(false);
-            console.log(coins)
         })()
     },[])
 
@@ -35,12 +36,13 @@ function Coins () {
             <Header>
                 <Title>코인 살펴보기</Title>
             </Header>
-            {loading ? ("Loading...") : (
+            {loading ? (<LoadingWrapper><LoadingImage src={loadingImg}/></LoadingWrapper>) : (
             <CoinList>
                 {renderCoins()}   
                 </CoinList>
                 )
             }
+            
         </Wrapper>
     )
 }

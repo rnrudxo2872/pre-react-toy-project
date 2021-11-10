@@ -1,4 +1,20 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, keyframes } from "styled-components";
+import { LoadingImage } from "./Loading.styled";
+
+const spinLogo = keyframes`
+    0%{
+        transform: rotate(0deg);
+        border-radius:100%;
+    }
+    50%{
+        transform: rotate(180deg);
+        border-radius:75%;
+    }
+    100%{
+        transform: rotate(360deg)
+        border-radius:100%;
+    }
+`
 
 export const GlobalStyled = createGlobalStyle`
   html, body, div, span, applet, object, iframe,
@@ -256,4 +272,10 @@ body {
     background-color: ${(props) => props.theme.bgColor};
     color: ${(props) => props.theme.textColor};
 }
+
+@media(prefers-reduced-motion: no-preference) {
+    ${LoadingImage} {
+        animation: ${spinLogo} infinite 20s linear;
+    }        
+}    
 `
