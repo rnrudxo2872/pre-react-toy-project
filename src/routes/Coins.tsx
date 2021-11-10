@@ -1,6 +1,7 @@
 import { memo, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { CoinInterface } from "../interfaces/Coins.interface";
-import { Coin, CoinList, Header, Title, Wrapper } from "../styledComponets/Coins.styled";
+import { Coin, CoinList, Header, Title, Wrapper, Img } from "../styledComponets/Coins.styled";
 
 function Coins () {
     const [coins, setCoins] = useState<CoinInterface[]>([]);
@@ -11,8 +12,22 @@ function Coins () {
             const data:CoinInterface[] = await (await fetch('https://api.coinpaprika.com/v1/coins')).json();
             setCoins(data.slice(0,20));
             setLoading(false);
+            console.log(coins)
         })()
     },[])
+
+    const renderCoins = () => coins.map((coin,index) => 
+        <Coin key={coin.id}>
+            <Link to={{
+                    pathname:`/${coin.id}`,
+                    state:{
+                        coinId:coin.id,
+                        coinSymbol:coin.symbol
+                    }
+                }}>
+                <Img src={`https://cryptoicon-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`} />{coin.name}
+            </Link>
+        </Coin>)
     return (
         <Wrapper>
             <Header>
@@ -20,13 +35,7 @@ function Coins () {
             </Header>
             {loading ? ("Loading...") : (
             <CoinList>
-                {
-                coins.map((coin,index) => 
-                    <Coin key={coin.id}>
-                        {coin.name}
-                    </Coin>
-                    )
-                }
+                {renderCoins()}   
                 </CoinList>
                 )
             }

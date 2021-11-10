@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.article`
     margin: 0 auto;
     max-width: 480px;
 `
@@ -15,9 +15,18 @@ export const Title = styled.h1`
 `
 export const CoinList = styled.ul``;
 export const Coin = styled.li`
-    padding: 10px 20px;
     background-color: ${(props) => props.theme.textColor};
     color: ${(props) => props.theme.bgColor};
     margin-bottom: 10px;
     border-radius: 8px;
+
+    a {
+        display: block;
+        padding: 10px 20px;
+    }
+`
+export const Img = styled.img`
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
 `

@@ -102,6 +102,11 @@ html {
     -ms-text-size-adjust: 100%; /* 2 */
 }
 
+a {
+    text-decoration: none;
+    color:inherit;
+}
+
 a:focus {
     outline: thin dotted;
 }
