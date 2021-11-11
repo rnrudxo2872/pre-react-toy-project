@@ -8,24 +8,18 @@ import loadingImg from "../loading-img.png";
 import { Link } from "react-router-dom";
 import Price from "../components/Price";
 import Chart from "../components/Chart";
+import { useQuery } from "react-query";
+import { fetchCoinAPI } from "../api";
 
 function CoinDetail() {
-    const [coinInfo, setCoinInfo] = useState<CoinInfo>();
-    const [coinPrice, setCoinPrice] = useState<CoinPrice>();
-    const [loading, setLoading] = useState(true);
     const {state} = useLocation<CoinRouteState>();
     const {id} = useParams<CoinRouteParams>();
 
-    useEffect(() => {
-        (async() => {
-            const loadedCoinInfo = await (await fetch(`https://api.coinpaprika.com/v1/coins/${state?.coinId ?? id}`)).json();
-            setCoinInfo(loadedCoinInfo);
-            
-            const loadedPriceInfo = await (await fetch(`https://api.coinpaprika.com/v1/tickers/${state?.coinId ?? id}`)).json();
-            setCoinPrice(loadedPriceInfo);
-            setLoading(false);
-        })()
-    },[id, state?.coinId])
+    const {isLoading:isInfoLoading, error:infoLoadError, data:infoData} = useQuery<CoinInfo>(["info",id], fetchCoinAPI.bind(`coins/${state?.coinId ?? id}`));
+    const {isLoading:isTickersLoading, error:tickersLoadError, data:tickersData} = useQuery<CoinPrice>(["tickers",id], fetchCoinAPI.bind(`tickers/${state?.coinId ?? id}`));
+    const isLoading = isInfoLoading || isTickersLoading;
+
+    if(infoLoadError || tickersLoadError) throw new Error("fetch data error");
 
     function renderCoinInfo() {
         return (
@@ -33,28 +27,28 @@ function CoinDetail() {
                 <Overview>
                     <OverviewItem>
                         <span>rank</span>
-                        <span>{coinInfo?.rank}</span>
+                        <span>{infoData?.rank}</span>
                     </OverviewItem>
                     <OverviewItem>
                         <span>symbol</span>
-                        <span>{coinInfo?.symbol}</span>
+                        <span>{infoData?.symbol}</span>
                     </OverviewItem>
                     <OverviewItem>
                         <span>active</span>
-                        <span>{`${coinInfo?.is_active}`}</span>
+                        <span>{`${infoData?.is_active}`}</span>
                     </OverviewItem>
                 </Overview>
                 <Overview>
-                    {coinInfo?.description}
+                    {infoData?.description}
                 </Overview>
                 <Overview>
                 <OverviewItem>
                         <span>total supply</span>
-                        <span>{coinPrice?.total_supply}</span>
+                        <span>{tickersData?.total_supply}</span>
                     </OverviewItem>
                     <OverviewItem>
                         <span>max supply</span>
-                        <span>{coinPrice?.max_supply}</span>
+                        <span>{tickersData?.max_supply}</span>
                     </OverviewItem>
                 </Overview>
                 <Tabs>
@@ -78,13 +72,13 @@ function CoinDetail() {
             </BodyWrapper>
         )
     }
-    console.log("rerender")
+
     return(
         <Wrapper>
             <Header>
-                <Title>{state?.coinName ?? (loading ? "Loading..." : coinInfo?.name)}</Title>
+                <Title>{state?.coinName ?? (isLoading ? "Loading..." : infoData?.name)}</Title>
             </Header>
-            {loading ? <LoadingWrapper><LoadingImage src={loadingImg}/></LoadingWrapper> : renderCoinInfo()}
+            {isLoading ? <LoadingWrapper><LoadingImage src={loadingImg}/></LoadingWrapper> : renderCoinInfo()}
         </Wrapper>
     );
 }

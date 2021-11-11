@@ -1,32 +1,18 @@
-import { memo, useEffect, useState } from "react";
+import { memo } from "react";
 import { Link } from "react-router-dom";
 import { CoinInterface } from "../interfaces/Coins.interface";
 import { Coin, CoinList, Header, Title, Wrapper, Img } from "../styledComponets/Coins.styled";
 import { LoadingImage, LoadingWrapper } from "../styledComponets/Loading.styled";
 import loadingImg from "../loading-img.png"
-
-const cache:any = {}
+import { useQuery } from "react-query";
+import { fetchCoinAPI } from "../api";
 
 function Coins () {
-    const [coins, setCoins] = useState<CoinInterface[]>([]);
-    const [loading, setLoading] = useState(true);
+    const {isLoading, error, data:coins} = useQuery<CoinInterface[]>("allCoins", fetchCoinAPI.bind("coins"))
 
-    useEffect(() => {
-        if(cache['https://api.coinpaprika.com/v1/coins']) {
-            setCoins(cache['https://api.coinpaprika.com/v1/coins'].slice(0,150));
-            setLoading(false);
-            console.log("캐싱됨!!");
-        }else{
-            (async() => {
-                const data:CoinInterface[] = await (await fetch('https://api.coinpaprika.com/v1/coins')).json();
-                setCoins(data.slice(0,150));
-                cache['https://api.coinpaprika.com/v1/coins'] = data;
-                setLoading(false);
-            })()
-        }
-    },[])
+    if(error) throw new Error("fetch data error!");
 
-    const renderCoins = () => coins.map((coin,index) => 
+    const renderCoins = () => coins?.slice(0,100).map((coin,index) => 
         <Coin key={coin.id}>
             <Link to={{
                     pathname:`/${coin.id}`,
@@ -45,7 +31,7 @@ function Coins () {
             <Header>
                 <Title>코인 살펴보기</Title>
             </Header>
-            {loading ? (<LoadingWrapper><LoadingImage src={loadingImg}/></LoadingWrapper>) : (
+            {isLoading ? (<LoadingWrapper><LoadingImage src={loadingImg}/></LoadingWrapper>) : (
             <CoinList>
                 {renderCoins()}   
                 </CoinList>
