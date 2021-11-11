@@ -1,10 +1,13 @@
 import { memo, useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router";
+import { Route, Switch, useLocation, useParams } from "react-router";
 import { CoinInfo, CoinPrice, CoinRouteParams, CoinRouteState } from "../interfaces/CoinDetail.interface";
-import { BodyWrapper, Overview, OverviewItem } from "../styledComponets/CoinDetail.styled";
+import { BodyWrapper, Overview, OverviewItem, Tab, Tabs } from "../styledComponets/CoinDetail.styled";
 import { Header, Title, Wrapper } from "../styledComponets/Coins.styled";
 import { LoadingImage, LoadingWrapper } from "../styledComponets/Loading.styled";
 import loadingImg from "../loading-img.png";
+import { Link } from "react-router-dom";
+import Price from "../components/Price";
+import Chart from "../components/Chart";
 
 function CoinDetail() {
     const [coinInfo, setCoinInfo] = useState<CoinInfo>();
@@ -22,7 +25,7 @@ function CoinDetail() {
             setCoinPrice(loadedPriceInfo);
             setLoading(false);
         })()
-    },[coinInfo, coinPrice, id, state?.coinId])
+    },[id, state?.coinId])
 
     function renderCoinInfo() {
         return (
@@ -54,16 +57,34 @@ function CoinDetail() {
                         <span>{coinPrice?.max_supply}</span>
                     </OverviewItem>
                 </Overview>
+                <Tabs>
+                    <Tab>
+                        <Link to={`/${id}/price`}>price</Link>
+                    </Tab>
+                    <Tab>
+                        <Link to={`/${id}/chart`}>chart</Link>
+                    </Tab>
+                </Tabs>
+                <Switch>
+                    <Route path={`/${id}/price`}>
+                        <Price />
+                    </Route>
+                    <Route path={`/${id}/chart`}>
+                        <Chart />
+                    </Route>
+                    <Route exact path={`/${id}`}>
+                    </Route>
+                </Switch>
             </BodyWrapper>
         )
     }
-
+    console.log("rerender")
     return(
         <Wrapper>
             <Header>
                 <Title>{state?.coinName ?? (loading ? "Loading..." : coinInfo?.name)}</Title>
             </Header>
-                {loading ? <LoadingWrapper><LoadingImage src={loadingImg}/></LoadingWrapper> : renderCoinInfo()}
+            {loading ? <LoadingWrapper><LoadingImage src={loadingImg}/></LoadingWrapper> : renderCoinInfo()}
         </Wrapper>
     );
 }

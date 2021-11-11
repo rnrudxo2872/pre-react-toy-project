@@ -6,7 +6,7 @@ function Routers() {
     return (
         <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Switch>
-                <Route exact path="/:id">
+                <Route path="/:id">
                     <CoinDetail />
                 </Route>
                 <Route exact path="/">

@@ -29,3 +29,11 @@ export const OverviewItem = styled.div`
         color:#5394e9cc
     }
 `
+
+export const Tabs = styled.section`
+    
+`
+
+export const Tab = styled.button`
+    
+`
