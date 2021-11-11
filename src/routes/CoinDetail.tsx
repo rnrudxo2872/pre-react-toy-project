@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { memo } from "react";
 import { Route, Switch, useLocation, useParams } from "react-router";
 import { CoinInfo, CoinPrice, CoinRouteParams, CoinRouteState } from "../interfaces/CoinDetail.interface";
 import { BodyWrapper, Overview, OverviewItem, Tab, Tabs } from "../styledComponets/CoinDetail.styled";
