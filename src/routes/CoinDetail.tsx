@@ -64,7 +64,7 @@ function CoinDetail() {
                         <Price />
                     </Route>
                     <Route path={`/${id}/chart`}>
-                        <Chart />
+                        <Chart coinId={id}/>
                     </Route>
                     <Route exact path={`/${id}`}>
                     </Route>
