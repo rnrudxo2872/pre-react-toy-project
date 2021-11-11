@@ -5,6 +5,7 @@ export const DarkTheme: DefaultTheme = {
   borderRadius: "10%",
   textColor: "white",
   titleColor: "#f39d3b",
+  OverveiwColor: "rgba(0,0,0,0.3)",
 };
 
 export const LightTheme: DefaultTheme = {
@@ -12,6 +13,7 @@ export const LightTheme: DefaultTheme = {
   borderRadius: "10%",
   textColor: "black",
   titleColor: "#f39d3b",
+  OverveiwColor: "rgba(0,0,0,0.3)",
 };
 
 export const BasicTheme: DefaultTheme = {
@@ -19,4 +21,5 @@ export const BasicTheme: DefaultTheme = {
   borderRadius: "10%",
   textColor: "#DBDBDB",
   titleColor: "#f39d3b",
+  OverveiwColor: "rgba(0,0,0,0.3)",
 };

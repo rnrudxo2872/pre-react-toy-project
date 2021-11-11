@@ -7,7 +7,7 @@ export const BodyWrapper = styled.article`
 export const Overview = styled.section`
     display: flex;
     justify-content: space-between;
-    background-color: rgba(0,0,0,0.3);
+    background-color: ${(props) => props.theme.OverveiwColor};
     border-radius: 8px;
     padding: 10px 20px;
     line-height: 150%;
@@ -31,9 +31,19 @@ export const OverviewItem = styled.div`
 `
 
 export const Tabs = styled.section`
-    
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 15px;
+    margin: 15px 0;
 `
 
 export const Tab = styled.button`
-    
+    background-color: ${(props) => props.theme.OverveiwColor};
+    color:${(props) => props.theme.textColor};
+    border: 0;
+    border-radius: 20px;
+
+    a:focus {
+        outline: none;
+    }
 `

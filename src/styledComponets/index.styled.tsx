@@ -277,5 +277,5 @@ body {
     ${LoadingImage} {
         animation: ${spinLogo} infinite 20s linear;
     }        
-}    
+}
 `
