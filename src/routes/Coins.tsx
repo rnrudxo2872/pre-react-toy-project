@@ -5,16 +5,25 @@ import { Coin, CoinList, Header, Title, Wrapper, Img } from "../styledComponets/
 import { LoadingImage, LoadingWrapper } from "../styledComponets/Loading.styled";
 import loadingImg from "../loading-img.png"
 
+const cache:any = {}
+
 function Coins () {
     const [coins, setCoins] = useState<CoinInterface[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        (async() => {
-            const data:CoinInterface[] = await (await fetch('https://api.coinpaprika.com/v1/coins')).json();
-            setCoins(data.slice(0,150));
+        if(cache['https://api.coinpaprika.com/v1/coins']) {
+            setCoins(cache['https://api.coinpaprika.com/v1/coins'].slice(0,150));
             setLoading(false);
-        })()
+            console.log("캐싱됨!!");
+        }else{
+            (async() => {
+                const data:CoinInterface[] = await (await fetch('https://api.coinpaprika.com/v1/coins')).json();
+                setCoins(data.slice(0,150));
+                cache['https://api.coinpaprika.com/v1/coins'] = data;
+                setLoading(false);
+            })()
+        }
     },[])
 
     const renderCoins = () => coins.map((coin,index) => 
