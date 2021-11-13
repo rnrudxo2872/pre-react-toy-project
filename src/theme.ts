@@ -6,6 +6,7 @@ export const DarkTheme: DefaultTheme = {
   textColor: "white",
   titleColor: "#f39d3b",
   OverveiwColor: "rgba(0,0,0,0.3)",
+  highightColor: "#A8D1DF",
 };
 
 export const LightTheme: DefaultTheme = {
@@ -14,6 +15,7 @@ export const LightTheme: DefaultTheme = {
   textColor: "black",
   titleColor: "#f39d3b",
   OverveiwColor: "rgba(0,0,0,0.3)",
+  highightColor: "#A8D1DF",
 };
 
 export const BasicTheme: DefaultTheme = {
@@ -22,4 +24,5 @@ export const BasicTheme: DefaultTheme = {
   textColor: "#DBDBDB",
   titleColor: "#f39d3b",
   OverveiwColor: "rgba(0,0,0,0.3)",
+  highightColor: "#A8D1DF",
 };

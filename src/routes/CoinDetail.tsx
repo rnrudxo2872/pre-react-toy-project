@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { Route, Switch, useLocation, useParams } from "react-router";
+import { Route, Switch, useLocation, useParams, useRouteMatch } from "react-router";
 import { CoinInfo, CoinPrice, CoinRouteParams, CoinRouteState } from "../interfaces/CoinDetail.interface";
 import { BodyWrapper, Overview, OverviewItem, Tab, Tabs } from "../styledComponets/CoinDetail.styled";
 import { Header, Title, Wrapper } from "../styledComponets/Coins.styled";
@@ -18,6 +18,9 @@ function CoinDetail() {
     const {isLoading:isInfoLoading, error:infoLoadError, data:infoData} = useQuery<CoinInfo>(["info",id], fetchCoinAPI.bind(`coins/${state?.coinId ?? id}`));
     const {isLoading:isTickersLoading, error:tickersLoadError, data:tickersData} = useQuery<CoinPrice>(["tickers",id], fetchCoinAPI.bind(`tickers/${state?.coinId ?? id}`));
     const isLoading = isInfoLoading || isTickersLoading;
+
+    const isChart = useRouteMatch("/:id/chart");
+    const isPrice = useRouteMatch("/:id/price");
 
     if(infoLoadError || tickersLoadError) throw new Error("fetch data error");
 
@@ -52,10 +55,10 @@ function CoinDetail() {
                     </OverviewItem>
                 </Overview>
                 <Tabs>
-                    <Tab>
+                    <Tab isActive={isPrice != null}>
                         <Link to={`/${id}/price`}>price</Link>
                     </Tab>
-                    <Tab>
+                    <Tab isActive={isChart != null}>
                         <Link to={`/${id}/chart`}>chart</Link>
                     </Tab>
                 </Tabs>

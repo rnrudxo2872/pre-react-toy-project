@@ -7,5 +7,6 @@ declare module "styled-components" {
     textColor: string;
     titleColor: string;
     OverveiwColor: string;
+    highightColor: string;
   }
 }

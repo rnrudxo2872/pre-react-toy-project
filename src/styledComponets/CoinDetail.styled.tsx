@@ -37,9 +37,9 @@ export const Tabs = styled.section`
     margin: 15px 0;
 `
 
-export const Tab = styled.button`
+export const Tab = styled.button<{isActive:boolean}>`
     background-color: ${(props) => props.theme.OverveiwColor};
-    color:${(props) => props.theme.textColor};
+    color:${(props) => props.isActive ? props.theme.highightColor : props.theme.textColor };
     border: 0;
     border-radius: 20px;
 
