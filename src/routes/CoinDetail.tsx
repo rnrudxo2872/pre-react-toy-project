@@ -10,6 +10,7 @@ import Price from "../components/Price";
 import Chart from "../components/Chart";
 import { useQuery } from "react-query";
 import { fetchCoinAPI } from "../api";
+import { Helmet } from "react-helmet-async";
 
 function CoinDetail() {
     const {state} = useLocation<CoinRouteState>();
@@ -76,8 +77,14 @@ function CoinDetail() {
         )
     }
 
+    const capitalizeTitle = (str:string) => str.replace(/-/g,' ').toLowerCase().replace(/\w/, val => val.toUpperCase());
+
     return(
         <Wrapper>
+            <Helmet>
+                <title>GoosTracker - {capitalizeTitle(id)}</title>
+                <meta name="description" content={`This page displays detailed information about ${capitalizeTitle(id)}.`} />
+            </Helmet>
             <Header>
                 <Title>{state?.coinName ?? (isLoading ? "Loading..." : infoData?.name)}</Title>
             </Header>

@@ -1,5 +1,6 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async"
 import { CoinInterface } from "../interfaces/Coins.interface";
 import { Coin, CoinList, Header, Title, Wrapper, Img } from "../styledComponets/Coins.styled";
 import { LoadingImage, LoadingWrapper } from "../styledComponets/Loading.styled";
@@ -28,6 +29,10 @@ function Coins () {
         </Coin>)
     return (
         <Wrapper>
+            <Helmet>
+                <title>GoosTracker - Coins</title>
+                <meta name="description" content="GoosTracker introduces coins!" />
+            </Helmet>
             <Header>
                 <Title>코인 살펴보기</Title>
             </Header>
