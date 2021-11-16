@@ -17,13 +17,20 @@ function Chart({coinId}:ChartProps) {
             xaxis: {
               labels:{
                 show:false
-              }
+              },
+              type:"datetime",
+              categories: data?.map(val => val.time_close)
             },
             yaxis: {
               show:false
             },
             theme: {
                 mode:"dark"
+            },
+            tooltip: {
+              y:{
+                formatter:(value) => `$ ${value.toFixed(2)}`
+              }
             }
         }
         const series = [
