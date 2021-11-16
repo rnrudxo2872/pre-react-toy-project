@@ -8,7 +8,7 @@ function Chart({coinId}:ChartProps) {
     const {isLoading, error, data} = useQuery<OHLC[]>(["ohlc",coinId], () => fetchCoinHistory(coinId));
     
     if(error) throw new Error("fetch data error");
-    console.log(data)
+    
     function getChart() {
         const options:ApexCharts.ApexOptions = {
             chart: {

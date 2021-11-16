@@ -11,6 +11,7 @@ import Chart from "../components/Chart";
 import { useQuery } from "react-query";
 import { fetchCoinAPI } from "../api";
 import { Helmet } from "react-helmet-async";
+import PrevButton from "../components/PrevButton";
 
 function CoinDetail() {
     const {state} = useLocation<CoinRouteState>();
@@ -88,6 +89,7 @@ function CoinDetail() {
             <Header>
                 <Title>{state?.coinName ?? (isLoading ? "Loading..." : infoData?.name)}</Title>
             </Header>
+            <PrevButton />
             {isLoading ? <LoadingWrapper><LoadingImage src={loadingImg}/></LoadingWrapper> : renderCoinInfo()}
         </Wrapper>
     );
