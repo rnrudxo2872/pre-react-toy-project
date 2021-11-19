@@ -9,7 +9,9 @@ export const IsDarkButton = styled.div`
     padding: 12px 12px;
     display: flex;
     cursor: pointer;
-    -ms-user-select: none; 
+    background-color: ${(props) => props.theme.darkButtonColor};
+    color: ${(props) => props.theme.darkButtonTextColor};
+    -ms-user-select: none;
     -moz-user-select: -moz-none;
     -khtml-user-select: none;
     -webkit-user-select: none;

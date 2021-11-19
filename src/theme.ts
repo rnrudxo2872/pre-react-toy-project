@@ -7,6 +7,8 @@ export const DarkTheme: DefaultTheme = {
   titleColor: "#f39d3b",
   OverveiwColor: "rgba(0,0,0,0.3)",
   highightColor: "#A8D1DF",
+  darkButtonColor: "#FAEAFF",
+  darkButtonTextColor: "black",
 };
 
 export const LightTheme: DefaultTheme = {
@@ -16,4 +18,6 @@ export const LightTheme: DefaultTheme = {
   titleColor: "#454839",
   OverveiwColor: "rgba(0,0,0,0.3)",
   highightColor: "#C9A836",
+  darkButtonColor: "#005488",
+  darkButtonTextColor: "#D0EAF3",
 };
