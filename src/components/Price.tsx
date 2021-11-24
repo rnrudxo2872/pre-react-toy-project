@@ -1,8 +1,13 @@
 import { memo } from "react";
+import { IPrice } from "../interfaces/Price.interface";
+import { PriceWrapper } from "../styledComponets/Price.styled";
 
-function Price() {
+function Price({krw,usd}:IPrice) {
+
     return (
-        <h1>price!!</h1>
+        <PriceWrapper>
+            {Object.values(krw ?? {}).map(val => <div>{val}</div>)}
+        </PriceWrapper>
     )
 }
 
